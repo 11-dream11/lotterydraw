@@ -549,6 +549,13 @@
             color: var(--primary);
         }
         
+        .number-range-note {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+            margin-top: 5px;
+        }
+        
         .privacy-note {
             font-size: 0.8rem;
             color: var(--gray);
@@ -972,7 +979,7 @@
                             <p><strong>Date:</strong> November 28, 2025</p>
                         </div>
                     </div>
-                    <div class="winner-number">D-84723</div>
+                    <div class="winner-number">D-847</div>
                     <p>We've transferred the winning amount to the winner's account. Could you be next?</p>
                 </div>
                 
@@ -989,7 +996,7 @@
                             <p><strong>Date:</strong> November 25, 2025</p>
                         </div>
                     </div>
-                    <div class="winner-number">D-73915</div>
+                    <div class="winner-number">D-739</div>
                     <p>Another happy winner who achieved their dreams with Dream Lottery 999!</p>
                 </div>
             </div>
@@ -1020,10 +1027,11 @@
                         <label>Select Your Lucky Number</label>
                         <div class="number-selection">
                             <div class="alphabet-display">D</div>
-                            <input type="number" id="number" min="10000" max="99999" placeholder="Enter 5-digit number" required>
+                            <input type="number" id="number" min="0" max="999" placeholder="Enter number (0-999)" required>
                         </div>
+                        <p class="number-range-note">Please enter a number between 0 and 999</p>
                         <div class="selected-number" id="selectedNumberDisplay">
-                            Your Number: D-?????
+                            Your Number: D-???
                         </div>
                         <p class="privacy-note">Your contact details will be kept private and only used for winner notifications</p>
                     </div>
@@ -1164,9 +1172,11 @@
             const display = document.getElementById('selectedNumberDisplay');
             
             if (number) {
-                display.textContent = `Your Number: D-${number}`;
+                // Pad the number with leading zeros to make it 3 digits
+                const paddedNumber = number.padStart(3, '0');
+                display.textContent = `Your Number: DL-${paddedNumber}`;
             } else {
-                display.textContent = 'Your Number: D-?????';
+                display.textContent = 'Your Number: DL-???';
             }
         }
         
@@ -1184,14 +1194,14 @@
         
         // Sample buyers data with November 2025 dates
         const sampleBuyers = [
-            { ticketNo: 'DL-7294', name: 'Amit Sharma', mobile: '9876543210', email: 'amit.sharma@example.com', lotteryType: 'Mega Jackpot', selectedNumber: 'D-45678', date: '2025-11-28' },
-            { ticketNo: 'DL-6291', name: 'Priya Patel', mobile: '8765432109', email: 'priya.patel@example.com', lotteryType: 'Super Lotto', selectedNumber: 'D-78901', date: '2025-11-28' },
-            { ticketNo: 'DL-5287', name: 'Rahul Verma', mobile: '7654321098', email: 'rahul.verma@example.com', lotteryType: 'Quick Win', selectedNumber: 'D-12345', date: '2025-11-28' },
-            { ticketNo: 'DL-4276', name: 'Sneha Singh', mobile: '6543210987', email: 'sneha.singh@example.com', lotteryType: 'Lucky Draw', selectedNumber: 'D-32109', date: '2025-11-27' },
-            { ticketNo: 'DL-3265', name: 'Vikram Yadav', mobile: '5432109876', email: 'vikram.yadav@example.com', lotteryType: 'Mini Fortune', selectedNumber: 'D-65432', date: '2025-11-27' },
-            { ticketNo: 'DL-2254', name: 'Neha Gupta', mobile: '4321098765', email: 'neha.gupta@example.com', lotteryType: 'Mega Jackpot', selectedNumber: 'D-98765', date: '2025-11-26' },
-            { ticketNo: 'DL-1243', name: 'Sanjay Kumar', mobile: '3210987654', email: 'sanjay.kumar@example.com', lotteryType: 'Super Lotto', selectedNumber: 'D-23456', date: '2025-11-26' },
-            { ticketNo: 'DL-0232', name: 'Anjali Mishra', mobile: '2109876543', email: 'anjali.mishra@example.com', lotteryType: 'Quick Win', selectedNumber: 'D-56789', date: '2025-11-25' }
+            { ticketNo: 'DL-7294', name: 'Amit Sharma', mobile: '9876543210', email: 'amitsharma19@gmail.com', lotteryType: 'Mega Jackpot', selectedNumber: 'DL-456', date: '2025-11-28' },
+            { ticketNo: 'DL-6291', name: 'Priya Patel', mobile: '8765432109', email: 'priyapatel1999@gmail.com', lotteryType: 'Super Lotto', selectedNumber: 'DL-789', date: '2025-11-28' },
+            { ticketNo: 'DL-5287', name: 'Rahul Verma', mobile: '7654321098', email: 'rahulverma2@gmail.com', lotteryType: 'Quick Win', selectedNumber: 'DL-123', date: '2025-11-28' },
+            { ticketNo: 'DL-4276', name: 'Sneha Singh', mobile: '8543210987', email: 'snehasingh@gmail.com', lotteryType: 'Lucky Draw', selectedNumber: 'DL-321', date: '2025-11-27' },
+            { ticketNo: 'DL-3265', name: 'Vikram Yadav', mobile: '9432109876', email: 'vikramyadav11@gmail.com', lotteryType: 'Mini Fortune', selectedNumber: 'DL-654', date: '2025-11-27' },
+            { ticketNo: 'DL-2254', name: 'Neha Gupta', mobile: '9321098765', email: 'nehagupta007@gmail.com', lotteryType: 'Mega Jackpot', selectedNumber: 'DL-987', date: '2025-11-26' },
+            { ticketNo: 'DL-1243', name: 'Sanjay Kumar', mobile: '7210987654', email: 'sanjaykumar@gmail.com', lotteryType: 'Super Lotto', selectedNumber: 'DL-234', date: '2025-11-26' },
+            { ticketNo: 'DL-0232', name: 'Anjali Mishra', mobile: '8109876543', email: 'anjalimishra@gmail.com', lotteryType: 'Quick Win', selectedNumber: 'DL-567', date: '2025-11-25' }
         ];
         
         // Format date to display as "Nov 28, 2025"
@@ -1254,12 +1264,12 @@
             }
             
             if (!number) {
-                alert('Please enter a 5-digit number for your lottery ticket.');
+                alert('Please enter a number between 0 and 999 for your lottery ticket.');
                 return;
             }
             
-            if (number.length !== 5) {
-                alert('Please enter exactly 5 digits for your lottery number.');
+            if (number < 0 || number > 999) {
+                alert('Please enter a number between 0 and 999 only.');
                 return;
             }
             
@@ -1269,8 +1279,9 @@
             // Get current date (set to November 2025 for demo)
             const date = `2025-11-${Math.floor(Math.random() * 3) + 28}`;
             
-            // Create selected number with default alphabet 'D'
-            const selectedNumber = `D-${number}`;
+            // Create selected number with default alphabet 'D' and pad with zeros
+            const paddedNumber = number.padStart(3, '0');
+            const selectedNumber = `DL-${paddedNumber}`;
             
             // Add to buyers table
             const newBuyer = {
@@ -1291,7 +1302,7 @@
             
             // Reset form
             document.getElementById('ticketForm').reset();
-            document.getElementById('selectedNumberDisplay').textContent = 'Your Number: D-?????';
+            document.getElementById('selectedNumberDisplay').textContent = 'Your Number: D-???';
         });
         
         // Initialize
