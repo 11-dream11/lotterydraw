@@ -24,7 +24,6 @@
             background: var(--gradient);
             min-height: 100vh;
             color: #333;
-            line-height: 1.6;
         }
 
         header {
@@ -49,7 +48,6 @@
         }
         .logo i { color: var(--accent); margin-right: 8px; }
 
-        /* Mobile Menu Toggle */
         .menu-toggle {
             display: none;
             color: white;
@@ -72,7 +70,6 @@
 
         main { margin-top: 80px; padding: 1rem 0; }
 
-        /* Hero - Fully Responsive */
         .hero {
             text-align: center;
             padding: 80px 20px 60px;
@@ -88,7 +85,6 @@
             font-size: 1.1rem;
             max-width: 90%;
             margin: 0 auto 2rem;
-            opacity: 0.95;
         }
 
         .countdown {
@@ -101,10 +97,7 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.2);
             min-width: 280px;
         }
-        .countdown h2 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
+        .countdown h2 { font-size: 1.2rem; margin-bottom: 0.5rem; }
         #timer {
             font-size: 2.8rem;
             font-weight: 800;
@@ -120,7 +113,6 @@
             font-weight: 700;
         }
 
-        /* Responsive Grid */
         .lottery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -137,10 +129,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             transition: all 0.4s ease;
         }
-        .lottery-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-        }
+        .lottery-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
 
         .card-header {
             height: 140px;
@@ -160,22 +149,9 @@
             padding: 1.8rem 1.2rem;
             text-align: center;
         }
-        .card-body h3 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            color: var(--dark);
-        }
-        .prize {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin: 8px 0;
-        }
-        .entry-fee {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 18px;
-        }
+        .card-body h3 { font-size: 1.5rem; margin-bottom: 8px; color: var(--dark); }
+        .prize { font-size: 2.2rem; font-weight: 800; color: var(--primary); margin: 8px 0; }
+        .entry-fee { font-size: 1.1rem; color: #666; margin-bottom: 18px; }
         .btn {
             background: var(--primary);
             color: white;
@@ -190,19 +166,15 @@
             width: 100%;
             max-width: 250px;
         }
-        .btn:hover {
-            background: #4f46e5;
-            transform: translateY(-3px);
-        }
+        .btn:hover { background: #4f46e5; transform: translateY(-3px); }
 
-        /* Results Section */
-        .results {
+        .results, .recent-purchases {
             background: rgba(255,255,255,0.15);
             backdrop-filter: blur(15px);
             border-radius: 20px;
-            padding: 50px 20px;
+            padding: 40px 20px;
             text-align: center;
-            margin: 80px 15px;
+            margin: 60px 15px;
             color: white;
         }
         .winning-num {
@@ -213,7 +185,32 @@
             word-break: break-all;
         }
 
-        /* Modal - Mobile Friendly */
+        /* Recent Purchases Table */
+        .purchases-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+        .purchases-table th {
+            background: rgba(255,255,255,0.2);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .purchases-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .purchases-table tr:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .ticket-num {
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -234,7 +231,6 @@
             overflow: hidden;
             margin-top: 80px;
         }
-
         .form-area { padding: 2rem; }
         .form-area h2 { font-size: 1.6rem; text-align: center; margin-bottom: 1rem; }
         input {
@@ -245,7 +241,6 @@
             border-radius: 12px;
             font-size: 1rem;
         }
-
         .ticket-display {
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
@@ -271,7 +266,6 @@
             font-size: 0.9rem;
         }
 
-        /* Mobile First Responsiveness */
         @media (min-width: 768px) {
             .hero h1 { font-size: 4.5rem; }
             .hero p { font-size: 1.5rem; }
@@ -280,20 +274,8 @@
             .winning-num { font-size: 5.5rem; }
             .ticket-number { font-size: 4rem; }
             .logo { font-size: 2.2rem; }
-            nav a { font-size: 1.1rem; }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 2.4rem; }
-            #timer { font-size: 2.4rem; }
-            .countdown { padding: 1.5rem; }
-            .card-header { height: 120px; font-size: 2.5rem; }
-            .prize { font-size: 2rem; }
-            .btn { padding: 16px 30px; font-size: 1.2rem; }
-            .winning-num { font-size: 3rem; letter-spacing: 4px; }
-        }
-
-        /* Mobile Menu */
         @media (max-width: 768px) {
             .menu-toggle { display: block; }
             nav {
@@ -303,16 +285,13 @@
                 height: calc(100vh - 70px);
                 background: rgba(0,0,0,0.95);
                 flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
                 padding-top: 50px;
                 transition: 0.4s;
             }
             nav.active { left: 0; }
-            nav a {
-                font-size: 1.5rem;
-                margin: 20px 0;
-            }
+            nav a { font-size: 1.5rem; margin: 20px 0; }
+            .purchases-table { font-size: 0.85rem; }
+            .purchases-table th, .purchases-table td { padding: 8px; }
         }
     </style>
 </head>
@@ -397,11 +376,30 @@
             </div>
         </div>
 
+        <!-- Recent Purchases List -->
+        <div class="recent-purchases">
+            <h2>Recent Tickets Purchased</h2>
+            <p>See who just joined the draw!</p>
+            <table class="purchases-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Lottery</th>
+                        <th>Ticket Number</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="purchases-list">
+                    <!-- Filled by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
         <div class="results">
             <h2>Latest Winning Number</h2>
             <p>Draw Time: <span id="draw-time">Loading...</span></p>
             <div class="winning-num" id="winning-number">------</div>
-            <p style="margin-top:20px; font-size:1.1rem;">Congratulations to all winners! 🎉</p>
+            <p style="margin-top:20px;">Congratulations to all winners! 🎉</p>
         </div>
     </main>
 
@@ -412,7 +410,7 @@
                 <h2>Complete Your Purchase</h2>
                 <p style="text-align:center; font-size:1.2rem; color:var(--primary); margin-bottom:20px;" id="selected-info"></p>
                 
-                <input type="text" placeholder="Full Name" required>
+                <input type="text" id="buyer-name" placeholder="Full Name" required>
                 <input type="tel" placeholder="Mobile Number" pattern="[0-9]{10}" required>
                 <input type="email" placeholder="Email Address" required>
                 <button class="btn" style="width:100%; margin-top:20px; padding:16px;" onclick="buyNow()">Pay & Buy Ticket</button>
@@ -451,23 +449,73 @@
         updateTimer();
 
         let currentLottery = "";
+        let currentFee = "";
+        let currentPrize = "";
+
         function openModal(name, fee, prize) {
             currentLottery = name;
+            currentFee = fee;
+            currentPrize = prize;
             document.getElementById('selected-info').innerHTML = `<strong>${name}</strong><br>Fee: ${fee} | Prize: ${prize}`;
             document.getElementById('modal').style.display = 'flex';
             document.getElementById('ticket-success').style.display = 'none';
             document.querySelector('.form-area').style.display = 'block';
         }
 
+        // Store purchases (in real app this would be backend + database)
+        let purchases = JSON.parse(localStorage.getItem('lotteryPurchases')) || [];
+
+        function displayPurchases() {
+            const list = document.getElementById('purchases-list');
+            list.innerHTML = '';
+            const recent = purchases.slice(-10).reverse(); // Last 10
+            if (recent.length === 0) {
+                list.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:20px; color:#ccc;">No purchases yet. Be the first!</td></tr>';
+                return;
+            }
+            recent.forEach(p => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${p.name}</td>
+                    <td>${p.lottery}</td>
+                    <td class="ticket-num">${p.ticket}</td>
+                    <td>${p.time}</td>
+                `;
+                list.appendChild(row);
+            });
+        }
+
         function buyNow() {
+            const name = document.getElementById('buyer-name').value.trim() || "Anonymous Player";
+            if (!name) return alert("Please enter your name!");
+
             document.querySelector('.form-area').style.display = 'none';
             document.getElementById('ticket-success').style.display = 'block';
+
             const ticket = Math.floor(100000 + Math.random() * 900000);
             document.getElementById('ticket-num').textContent = ticket;
             document.getElementById('ticket-lottery').textContent = currentLottery;
-            confetti({ particleCount: 150, spread: 80 });
+
+            // Add to public list
+            const now = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+            purchases.push({
+                name: name.split(' ')[0] + (name.includes(' ') ? ' ' + name.split(' ')[1].charAt(0) + '.' : ''), // Privacy: First + Initial
+                lottery: currentLottery,
+                ticket: ticket,
+                time: now
+            });
+
+            // Save to localStorage (persists across refresh)
+            localStorage.setItem('lotteryPurchases', JSON.stringify(purchases));
+
+            // Update public list
+            displayPurchases();
+
+            confetti({ particleCount: 200, spread: 80 });
         }
 
+        // Initial display
+        displayPurchases();
         document.getElementById('winning-number').textContent = Math.floor(100000 + Math.random() * 900000);
     </script>
 </body>
