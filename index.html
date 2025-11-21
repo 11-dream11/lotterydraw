@@ -523,8 +523,19 @@
             align-items: center;
         }
         
-        .number-selection select, .number-selection input {
+        .number-selection input {
             flex: 1;
+        }
+        
+        .alphabet-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            background: var(--light);
+            padding: 12px 20px;
+            border-radius: 8px;
+            min-width: 60px;
+            text-align: center;
         }
         
         .selected-number {
@@ -536,6 +547,14 @@
             font-weight: bold;
             font-size: 1.2rem;
             color: var(--primary);
+        }
+        
+        .privacy-note {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
         }
         
         /* Buyers List */
@@ -580,6 +599,11 @@
         .ticket-number {
             font-weight: 700;
             color: var(--secondary);
+        }
+        
+        .privacy-masked {
+            color: var(--gray);
+            font-style: italic;
         }
         
         /* Footer */
@@ -948,7 +972,7 @@
                             <p><strong>Date:</strong> November 28, 2025</p>
                         </div>
                     </div>
-                    <div class="winner-number">A-847</div>
+                    <div class="winner-number">D-84723</div>
                     <p>We've transferred the winning amount to the winner's account. Could you be next?</p>
                 </div>
                 
@@ -965,7 +989,7 @@
                             <p><strong>Date:</strong> November 25, 2025</p>
                         </div>
                     </div>
-                    <div class="winner-number">D-739</div>
+                    <div class="winner-number">D-73915</div>
                     <p>Another happy winner who achieved their dreams with Dream Lottery 999!</p>
                 </div>
             </div>
@@ -995,40 +1019,13 @@
                     <div class="form-group">
                         <label>Select Your Lucky Number</label>
                         <div class="number-selection">
-                            <select id="alphabet" required>
-                                <option value="">Select Alphabet</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                                <option value="F">F</option>
-                                <option value="G">G</option>
-                                <option value="H">H</option>
-                                <option value="I">I</option>
-                                <option value="J">J</option>
-                                <option value="K">K</option>
-                                <option value="L">L</option>
-                                <option value="M">M</option>
-                                <option value="N">N</option>
-                                <option value="O">O</option>
-                                <option value="P">P</option>
-                                <option value="Q">Q</option>
-                                <option value="R">R</option>
-                                <option value="S">S</option>
-                                <option value="T">T</option>
-                                <option value="U">U</option>
-                                <option value="V">V</option>
-                                <option value="W">W</option>
-                                <option value="X">X</option>
-                                <option value="Y">Y</option>
-                                <option value="Z">Z</option>
-                            </select>
-                            <input type="number" id="number" min="1" max="1000" placeholder="Enter number (1-1000)" required>
+                            <div class="alphabet-display">D</div>
+                            <input type="number" id="number" min="10000" max="99999" placeholder="Enter 5-digit number" required>
                         </div>
                         <div class="selected-number" id="selectedNumberDisplay">
-                            Your Number: Not selected yet
+                            Your Number: D-?????
                         </div>
+                        <p class="privacy-note">Your contact details will be kept private and only used for winner notifications</p>
                     </div>
                     
                     <div class="form-group">
@@ -1163,31 +1160,38 @@
         
         // Update selected number display
         function updateSelectedNumber() {
-            const alphabet = document.getElementById('alphabet').value;
             const number = document.getElementById('number').value;
             const display = document.getElementById('selectedNumberDisplay');
             
-            if (alphabet && number) {
-                display.textContent = `Your Number: ${alphabet}-${number}`;
-            } else if (alphabet) {
-                display.textContent = `Your Number: ${alphabet}-???`;
-            } else if (number) {
-                display.textContent = `Your Number: ?-${number}`;
+            if (number) {
+                display.textContent = `Your Number: D-${number}`;
             } else {
-                display.textContent = 'Your Number: Not selected yet';
+                display.textContent = 'Your Number: D-?????';
             }
+        }
+        
+        // Mask phone number for privacy
+        function maskPhoneNumber(phone) {
+            return phone.substring(0, 3) + '****' + phone.substring(7);
+        }
+        
+        // Mask email for privacy
+        function maskEmail(email) {
+            const [local, domain] = email.split('@');
+            const maskedLocal = local.substring(0, 2) + '***' + local.substring(local.length - 1);
+            return maskedLocal + '@' + domain;
         }
         
         // Sample buyers data with November 2025 dates
         const sampleBuyers = [
-            { ticketNo: 'DL-7294', name: 'Amit Sharma', mobile: '9876543210', email: 'amit.sharma@example.com', lotteryType: 'Mega Jackpot', selectedNumber: 'B-456', date: '2025-11-28' },
-            { ticketNo: 'DL-6291', name: 'Priya Patel', mobile: '8765432109', email: 'priya.patel@example.com', lotteryType: 'Super Lotto', selectedNumber: 'C-789', date: '2025-11-28' },
-            { ticketNo: 'DL-5287', name: 'Rahul Verma', mobile: '7654321098', email: 'rahul.verma@example.com', lotteryType: 'Quick Win', selectedNumber: 'A-123', date: '2025-11-28' },
-            { ticketNo: 'DL-4276', name: 'Sneha Singh', mobile: '6543210987', email: 'sneha.singh@example.com', lotteryType: 'Lucky Draw', selectedNumber: 'D-321', date: '2025-11-27' },
-            { ticketNo: 'DL-3265', name: 'Vikram Yadav', mobile: '5432109876', email: 'vikram.yadav@example.com', lotteryType: 'Mini Fortune', selectedNumber: 'E-654', date: '2025-11-27' },
-            { ticketNo: 'DL-2254', name: 'Neha Gupta', mobile: '4321098765', email: 'neha.gupta@example.com', lotteryType: 'Mega Jackpot', selectedNumber: 'F-987', date: '2025-11-26' },
-            { ticketNo: 'DL-1243', name: 'Sanjay Kumar', mobile: '3210987654', email: 'sanjay.kumar@example.com', lotteryType: 'Super Lotto', selectedNumber: 'G-234', date: '2025-11-26' },
-            { ticketNo: 'DL-0232', name: 'Anjali Mishra', mobile: '2109876543', email: 'anjali.mishra@example.com', lotteryType: 'Quick Win', selectedNumber: 'H-567', date: '2025-11-25' }
+            { ticketNo: 'DL-7294', name: 'Amit Sharma', mobile: '9876543210', email: 'amit.sharma@example.com', lotteryType: 'Mega Jackpot', selectedNumber: 'D-45678', date: '2025-11-28' },
+            { ticketNo: 'DL-6291', name: 'Priya Patel', mobile: '8765432109', email: 'priya.patel@example.com', lotteryType: 'Super Lotto', selectedNumber: 'D-78901', date: '2025-11-28' },
+            { ticketNo: 'DL-5287', name: 'Rahul Verma', mobile: '7654321098', email: 'rahul.verma@example.com', lotteryType: 'Quick Win', selectedNumber: 'D-12345', date: '2025-11-28' },
+            { ticketNo: 'DL-4276', name: 'Sneha Singh', mobile: '6543210987', email: 'sneha.singh@example.com', lotteryType: 'Lucky Draw', selectedNumber: 'D-32109', date: '2025-11-27' },
+            { ticketNo: 'DL-3265', name: 'Vikram Yadav', mobile: '5432109876', email: 'vikram.yadav@example.com', lotteryType: 'Mini Fortune', selectedNumber: 'D-65432', date: '2025-11-27' },
+            { ticketNo: 'DL-2254', name: 'Neha Gupta', mobile: '4321098765', email: 'neha.gupta@example.com', lotteryType: 'Mega Jackpot', selectedNumber: 'D-98765', date: '2025-11-26' },
+            { ticketNo: 'DL-1243', name: 'Sanjay Kumar', mobile: '3210987654', email: 'sanjay.kumar@example.com', lotteryType: 'Super Lotto', selectedNumber: 'D-23456', date: '2025-11-26' },
+            { ticketNo: 'DL-0232', name: 'Anjali Mishra', mobile: '2109876543', email: 'anjali.mishra@example.com', lotteryType: 'Quick Win', selectedNumber: 'D-56789', date: '2025-11-25' }
         ];
         
         // Format date to display as "Nov 28, 2025"
@@ -1207,8 +1211,8 @@
                 row.innerHTML = `
                     <td class="ticket-number">${buyer.ticketNo}</td>
                     <td>${buyer.name}</td>
-                    <td>${buyer.mobile}</td>
-                    <td>${buyer.email}</td>
+                    <td class="privacy-masked">${maskPhoneNumber(buyer.mobile)}</td>
+                    <td class="privacy-masked">${maskEmail(buyer.email)}</td>
                     <td>${buyer.lotteryType}</td>
                     <td>${buyer.selectedNumber}</td>
                     <td>${formatDate(buyer.date)}</td>
@@ -1239,7 +1243,6 @@
             e.preventDefault();
             
             const lotteryType = document.getElementById('lotteryType').value;
-            const alphabet = document.getElementById('alphabet').value;
             const number = document.getElementById('number').value;
             const name = document.getElementById('name').value;
             const mobile = document.getElementById('mobile').value;
@@ -1250,8 +1253,13 @@
                 return;
             }
             
-            if (!alphabet || !number) {
-                alert('Please select both an alphabet and a number for your lottery ticket.');
+            if (!number) {
+                alert('Please enter a 5-digit number for your lottery ticket.');
+                return;
+            }
+            
+            if (number.length !== 5) {
+                alert('Please enter exactly 5 digits for your lottery number.');
                 return;
             }
             
@@ -1261,8 +1269,8 @@
             // Get current date (set to November 2025 for demo)
             const date = `2025-11-${Math.floor(Math.random() * 3) + 28}`;
             
-            // Create selected number
-            const selectedNumber = `${alphabet}-${number}`;
+            // Create selected number with default alphabet 'D'
+            const selectedNumber = `D-${number}`;
             
             // Add to buyers table
             const newBuyer = {
@@ -1283,7 +1291,7 @@
             
             // Reset form
             document.getElementById('ticketForm').reset();
-            document.getElementById('selectedNumberDisplay').textContent = 'Your Number: Not selected yet';
+            document.getElementById('selectedNumberDisplay').textContent = 'Your Number: D-?????';
         });
         
         // Initialize
@@ -1291,8 +1299,7 @@
             startCountdown();
             populateBuyersTable();
             
-            // Add event listeners for number selection
-            document.getElementById('alphabet').addEventListener('change', updateSelectedNumber);
+            // Add event listener for number selection
             document.getElementById('number').addEventListener('input', updateSelectedNumber);
         };
     </script>
