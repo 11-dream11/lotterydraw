@@ -158,6 +158,17 @@
             color: white;
         }
         
+        .btn-withdrawal {
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: white;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .btn-withdrawal:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.6);
+        }
+        
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -993,13 +1004,16 @@
                     <ul>
                         <li><a href="#" class="active">Home</a></li>
                         <li><a href="#lotteries">Lotteries</a></li>
-                        <li><a href="#winners">Winners</a></li>
+                        <li><a href="#" id="winnersLink">Winners</a></li>
                         <li><a href="#buy">Buy Ticket</a></li>
                         <li><a href="#buyers">Participants</a></li>
                     </ul>
                 </nav>
                 
                 <div class="auth-buttons">
+                    <button class="btn btn-withdrawal" id="withdrawalBtn">
+                        <i class="fas fa-wallet"></i> Withdrawal
+                    </button>
                     <button class="btn btn-outline">Login</button>
                     <button class="btn btn-primary">Sign Up</button>
                 </div>
@@ -1290,7 +1304,7 @@
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#lotteries">Lotteries</a></li>
-                        <li><a href="#winners">Winners</a></li>
+                        <li><a href="#" id="footerWinnersLink">Winners</a></li>
                         <li><a href="#buy">Buy Ticket</a></li>
                         <li><a href="#buyers">Participants</a></li>
                     </ul>
@@ -1507,6 +1521,16 @@
             document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
         
+        // Redirect to winners page
+        function redirectToWinnersPage() {
+            window.location.href = 'https://11-dream11.github.io/winner/';
+        }
+        
+        // Redirect to withdrawal page
+        function redirectToWithdrawalPage() {
+            window.location.href = 'https://11-dream11.github.io/withdrawal/';
+        }
+        
         // Show ticket popup
         function showTicketPopup(ticketData) {
             const modal = document.getElementById('ticketModal');
@@ -1629,6 +1653,13 @@
                 document.getElementById('buyTicketBtn').disabled = true;
                 document.getElementById('buyTicketBtn').style.opacity = '0.6';
             }
+            
+            // Add event listeners for winners links
+            document.getElementById('winnersLink').addEventListener('click', redirectToWinnersPage);
+            document.getElementById('footerWinnersLink').addEventListener('click', redirectToWinnersPage);
+            
+            // Add event listener for withdrawal button
+            document.getElementById('withdrawalBtn').addEventListener('click', redirectToWithdrawalPage);
         };
     </script>
 </body>
