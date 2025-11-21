@@ -689,6 +689,134 @@
             opacity: 0.7;
         }
         
+        /* Popup Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .ticket-modal {
+            background: var(--white);
+            border-radius: 15px;
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+        
+        .modal-overlay.active .ticket-modal {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--primary);
+        }
+        
+        .ticket-modal h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .ticket-modal p {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--gray);
+        }
+        
+        .ticket-display {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ticket-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--accent);
+        }
+        
+        .ticket-display h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .ticket-number-display {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 15px 0;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .ticket-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .ticket-detail {
+            text-align: center;
+        }
+        
+        .ticket-detail p:first-child {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--accent);
+        }
+        
+        .ticket-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
             .hero h1 {
@@ -761,6 +889,10 @@
             .number-selection {
                 flex-direction: column;
             }
+            
+            .ticket-actions {
+                flex-direction: column;
+            }
         }
         
         @media (max-width: 576px) {
@@ -798,6 +930,14 @@
             
             .footer-content {
                 grid-template-columns: 1fr;
+            }
+            
+            .ticket-modal {
+                padding: 20px;
+            }
+            
+            .ticket-number-display {
+                font-size: 2rem;
             }
         }
     </style>
@@ -1137,6 +1277,35 @@
         </div>
     </footer>
 
+    <!-- Ticket Popup Modal -->
+    <div class="modal-overlay" id="ticketModal">
+        <div class="ticket-modal">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <h2>Your Ticket is Confirmed!</h2>
+            <p>Good luck in the upcoming draw!</p>
+            
+            <div class="ticket-display">
+                <h3 id="ticketLotteryType">Mega Jackpot</h3>
+                <div class="ticket-number-display" id="ticketNumberDisplay">DL-847</div>
+                <div class="ticket-details">
+                    <div class="ticket-detail">
+                        <p>Ticket No.</p>
+                        <p id="ticketId">DL-7294</p>
+                    </div>
+                    <div class="ticket-detail">
+                        <p>Draw Date</p>
+                        <p id="ticketDrawDate">Nov 28, 2025</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ticket-actions">
+                <button class="btn btn-outline" id="printTicket">Print Ticket</button>
+                <button class="btn btn-primary" id="closeModalBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Countdown Timer
         function startCountdown() {
@@ -1242,6 +1411,25 @@
             document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
         
+        // Show ticket popup
+        function showTicketPopup(ticketData) {
+            const modal = document.getElementById('ticketModal');
+            document.getElementById('ticketLotteryType').textContent = ticketData.lotteryType;
+            document.getElementById('ticketNumberDisplay').textContent = ticketData.selectedNumber;
+            document.getElementById('ticketId').textContent = ticketData.ticketNo;
+            document.getElementById('ticketDrawDate').textContent = formatDate(ticketData.date);
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Close ticket popup
+        function closeTicketPopup() {
+            const modal = document.getElementById('ticketModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
         // Mobile menu toggle
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             const nav = document.getElementById('mainNav');
@@ -1297,8 +1485,8 @@
             sampleBuyers.unshift(newBuyer);
             populateBuyersTable();
             
-            // Show success message
-            alert(`Congratulations! Your ticket has been purchased successfully.\nYour Ticket Number: ${ticketNo}\nYour Selected Number: ${selectedNumber}\nGood Luck!`);
+            // Show ticket popup
+            showTicketPopup(newBuyer);
             
             // Reset form
             document.getElementById('ticketForm').reset();
@@ -1312,6 +1500,20 @@
             
             // Add event listener for number selection
             document.getElementById('number').addEventListener('input', updateSelectedNumber);
+            
+            // Close modal events
+            document.getElementById('closeModal').addEventListener('click', closeTicketPopup);
+            document.getElementById('closeModalBtn').addEventListener('click', closeTicketPopup);
+            document.getElementById('ticketModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeTicketPopup();
+                }
+            });
+            
+            // Print ticket functionality
+            document.getElementById('printTicket').addEventListener('click', function() {
+                window.print();
+            });
         };
     </script>
 </body>
